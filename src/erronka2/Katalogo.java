@@ -215,12 +215,12 @@ public class Katalogo {
 		panelc.setBounds(586, 92, 281, 509);
 		frame.getContentPane().add(panelc);
 		panelc.setLayout(null);
-		
+
 		paneld = new JPanel();
 		paneld.setBackground(SystemColor.controlLtHighlight);
 		paneld.setBounds(866, -1, 577, 602);
 		frame.getContentPane().add(paneld);
-		
+
 		lblIzenburua = new JLabel("Erosketa Orga");
 		lblIzenburua.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIzenburua.setFont(new Font("Colonna MT", Font.PLAIN, 46));
@@ -376,7 +376,7 @@ public class Katalogo {
 		btnC.setBounds(166, 269, 63, 38);
 		panelc.add(btnC);
 		paneld.setLayout(null);
-		
+
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(71, 249, 452, 188);
 		paneld.add(scrollPane);
@@ -388,24 +388,32 @@ public class Katalogo {
 						{ null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
 						{ null, null, null }, { null, null, null }, },
 				new String[] { "Izena", "Kantitatea", "Prezioa" }));
-		
-				btnAurrera = new JButton("->");
-				btnAurrera.setBounds(478, 568, 89, 23);
-				paneld.add(btnAurrera);
-				btnAurrera.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Laburpena laburpena = new Laburpena(sc, motak, izenak, kodeak, prezioak, argazkiIzenak, mota2, datuak);
-						laburpena.frame.setVisible(true);
-						frame.dispose();
-					}
-				});
-		
 
+		btnAurrera = new JButton("->");
+		btnAurrera.setBounds(478, 568, 89, 23);
+		paneld.add(btnAurrera);
+		btnAurrera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Laburpena laburpena = new Laburpena(sc, motak, izenak, kodeak, prezioak, argazkiIzenak, mota2, datuak);
+				laburpena.frame.setVisible(true);
+				frame.dispose();
+			}
+		});
+
+		DefaultTableModel model = (DefaultTableModel) tablaProdukt.getModel();
+		for (int i = 0; i < datuak.length; i++) {
+			if (datuak[i][0] != null) { // Verificar que hay datos antes de añadir
+				model.setValueAt(datuak[i][0], i, 0);
+				model.setValueAt(datuak[i][1], i, 1);
+				model.setValueAt(datuak[i][2], i, 2);
+			}
+		}
 
 		btnIntro = new JButton("Intro");
 		btnIntro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				botoiIntro(panelc, btnIntro, motak, izenak, kodeak, prezioak, argazkiIzenak, textselecnum, mota2, datuak, izenak1, argazkiak1);
+				botoiIntro(panelc, btnIntro, motak, izenak, kodeak, prezioak, argazkiIzenak, textselecnum, mota2,
+						datuak, izenak1, argazkiak1);
 				gehitu(datuak, tablaProdukt, frame, scrollPane);
 				DefaultTableModel model = (DefaultTableModel) tablaProdukt.getModel();
 				for (int i = 0; i < datuak.length; i++) {
@@ -415,7 +423,7 @@ public class Katalogo {
 						model.setValueAt(datuak[i][2], i, 2);
 					}
 				}
-				
+
 			}
 		});
 		btnIntro.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -494,7 +502,7 @@ public class Katalogo {
 		panelb.add(lbl4_9);
 
 		frame.setVisible(true);
-		
+
 	}
 
 	public static void botoiIntro(JPanel panelc, JButton btnIntro, String[] motak, String[] izenak, String[] kodeak,
@@ -518,7 +526,6 @@ public class Katalogo {
 							prezio = prezioak[i];
 							izenak1 = izenak[i];
 							argazkiak1 = argazkiIzenak[i];
-							
 
 							// Buscamos si el producto ya está en el array datuak
 							for (int j = 0; j < datuak.length; j++) {
@@ -540,7 +547,7 @@ public class Katalogo {
 
 							// Si el producto no está en el array, añadirlo en la primera posición libre
 							if (!aipatuta && kont2 != -1) {
-								
+
 								datuak[kont2][0] = izenak1; // Asigna el nombre del producto
 								datuak[kont2][1] = "1"; // Inicializar la cantidad a 1
 								datuak[kont2][2] = prezio.toString(); // Guardar el precio inicial como texto
@@ -829,7 +836,7 @@ public class Katalogo {
 			}
 		}
 	}
-	
+
 	public static void gehitu(String[][] datuak, JTable tablaProdukt, JFrame frame, JScrollPane scrollPane) {
 		DefaultTableModel model = (DefaultTableModel) tablaProdukt.getModel();
 		model.setRowCount(0); // Limpiar la tabla
@@ -837,7 +844,7 @@ public class Katalogo {
 		// Actualizar la tabla con los datos
 		for (int i = 0; i < datuak.length; i++) {
 			if (datuak[i][0] != null) { // Verificar que hay datos antes de añadir
-				model.addRow(new Object[] { datuak[i][0], datuak[i][1], datuak[i][2]});
+				model.addRow(new Object[] { datuak[i][0], datuak[i][1], datuak[i][2] });
 			}
 		}
 
