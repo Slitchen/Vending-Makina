@@ -59,7 +59,6 @@ public class ProduktuMenua {
 		lblIzenburua = new JLabel("Produktu Menua");
 		lblIzenburua.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIzenburua.setFont(new Font("Colonna MT", Font.PLAIN, 46));
-		lblIzenburua.setEnabled(false);
 		lblIzenburua.setBounds(256, 11, 350, 91);
 		panelA.add(lblIzenburua);
 

@@ -6,8 +6,12 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.event.ActionListener;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
@@ -18,6 +22,10 @@ import java.awt.SystemColor;
 public class Katalogo {
 
 	public JFrame frame;
+	private JLabel lblIzenburua;
+	private JPanel paneld;
+	private JScrollPane scrollPane;
+	private JTable tablaProdukt;
 	private JTextField textselecnum;
 	private JPanel panela;
 	private JPanel panelb;
@@ -89,7 +97,7 @@ public class Katalogo {
 		String argazkiak1 = "";
 
 		frame = new JFrame();
-		frame.setBounds(100, 100, 875, 640);
+		frame.setBounds(100, 100, 1459, 640);
 		frame.setBackground(SystemColor.controlLtHighlight);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -97,7 +105,7 @@ public class Katalogo {
 		// Configura tu GUI como lo tenías antes
 		panela = new JPanel();
 		panela.setBackground(SystemColor.controlLtHighlight);
-		panela.setBounds(0, 0, 867, 93);
+		panela.setBounds(6, -1, 861, 93);
 		frame.getContentPane().add(panela);
 		panela.setLayout(null);
 
@@ -207,6 +215,17 @@ public class Katalogo {
 		panelc.setBounds(586, 92, 281, 509);
 		frame.getContentPane().add(panelc);
 		panelc.setLayout(null);
+		
+		paneld = new JPanel();
+		paneld.setBackground(SystemColor.controlLtHighlight);
+		paneld.setBounds(866, -1, 577, 602);
+		frame.getContentPane().add(paneld);
+		
+		lblIzenburua = new JLabel("Erosketa Orga");
+		lblIzenburua.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIzenburua.setFont(new Font("Colonna MT", Font.PLAIN, 46));
+		lblIzenburua.setBounds(117, 0, 350, 91);
+		paneld.add(lblIzenburua);
 
 		textselecnum = new JTextField();
 		textselecnum.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -356,11 +375,47 @@ public class Katalogo {
 		btnC.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnC.setBounds(166, 269, 63, 38);
 		panelc.add(btnC);
+		paneld.setLayout(null);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(71, 249, 452, 188);
+		paneld.add(scrollPane);
+
+		tablaProdukt = new JTable();
+		scrollPane.setViewportView(tablaProdukt);
+		tablaProdukt.setModel(new DefaultTableModel(
+				new Object[][] { { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
+						{ null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
+						{ null, null, null }, { null, null, null }, },
+				new String[] { "Izena", "Kantitatea", "Prezioa" }));
+		
+				btnAurrera = new JButton("->");
+				btnAurrera.setBounds(478, 568, 89, 23);
+				paneld.add(btnAurrera);
+				btnAurrera.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Laburpena laburpena = new Laburpena(sc, motak, izenak, kodeak, prezioak, argazkiIzenak, mota2, datuak);
+						laburpena.frame.setVisible(true);
+						frame.dispose();
+					}
+				});
+		
+
 
 		btnIntro = new JButton("Intro");
 		btnIntro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				botoiIntro(panelc, btnIntro, motak, izenak, kodeak, prezioak, argazkiIzenak, textselecnum, mota2, datuak, izenak1, argazkiak1);
+				gehitu(datuak, tablaProdukt, frame, scrollPane);
+				DefaultTableModel model = (DefaultTableModel) tablaProdukt.getModel();
+				for (int i = 0; i < datuak.length; i++) {
+					if (datuak[i][0] != null) { // Verificar que hay datos antes de añadir
+						model.setValueAt(datuak[i][0], i, 0);
+						model.setValueAt(datuak[i][1], i, 1);
+						model.setValueAt(datuak[i][2], i, 2);
+					}
+				}
+				
 			}
 		});
 		btnIntro.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -372,21 +427,11 @@ public class Katalogo {
 		lblPrezioa.setBounds(112, 318, 46, 14);
 		panelc.add(lblPrezioa);
 
-		btnAurrera = new JButton("->");
-		btnAurrera.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Laburpena laburpena = new Laburpena(sc, motak, izenak, kodeak, prezioak, argazkiIzenak, mota2, datuak);
-				laburpena.frame.setVisible(true);
-				frame.dispose();
-			}
-		});
-		btnAurrera.setBounds(166, 475, 89, 23);
-		panelc.add(btnAurrera);
-
 		lblVending = new JLabel("Vending Makina");
-		lblVending.setBounds(277, 0, 342, 87);
+		lblVending.setHorizontalAlignment(SwingConstants.CENTER);
+		lblVending.setBounds(247, 0, 342, 87);
 		panela.add(lblVending);
-		lblVending.setFont(new Font("Cooper Black", Font.PLAIN, 41));
+		lblVending.setFont(new Font("Colonna MT", Font.PLAIN, 46));
 
 		btnAtzera = new JButton("<-");
 		btnAtzera.setForeground(new Color(255, 0, 0));
@@ -449,6 +494,7 @@ public class Katalogo {
 		panelb.add(lbl4_9);
 
 		frame.setVisible(true);
+		
 	}
 
 	public static void botoiIntro(JPanel panelc, JButton btnIntro, String[] motak, String[] izenak, String[] kodeak,
@@ -782,5 +828,21 @@ public class Katalogo {
 					break;
 			}
 		}
+	}
+	
+	public static void gehitu(String[][] datuak, JTable tablaProdukt, JFrame frame, JScrollPane scrollPane) {
+		DefaultTableModel model = (DefaultTableModel) tablaProdukt.getModel();
+		model.setRowCount(0); // Limpiar la tabla
+
+		// Actualizar la tabla con los datos
+		for (int i = 0; i < datuak.length; i++) {
+			if (datuak[i][0] != null) { // Verificar que hay datos antes de añadir
+				model.addRow(new Object[] { datuak[i][0], datuak[i][1], datuak[i][2]});
+			}
+		}
+
+		// Refrescar la UI de la tabla
+		scrollPane.setViewportView(tablaProdukt);
+		((JPanel) frame.getContentPane()).updateUI();
 	}
 }

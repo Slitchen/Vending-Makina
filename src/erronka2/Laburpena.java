@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import java.util.Scanner;
 import javax.swing.JLabel;
@@ -20,6 +21,8 @@ public class Laburpena {
 	private JPanel panel;
 	private JButton btnAurrera;
 	private JLabel lblIzenburua;
+	private JTextField txtPrezio2;
+	private JTextField txtPrezio;
 
 	public Laburpena(Scanner sc, String[] motak, String[] izenak, String[] kodeak, Double[] prezioak,
 			String[] argazkiIzenak, String mota, String[][] datuak) {
@@ -31,6 +34,7 @@ public class Laburpena {
 			String[] argazkiIzenak, String mota, String[][] datuak) {
 		double prezio1 = 0;
 		double prezio2 = 0;
+		double totalConIva = 0;
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 875, 640);
@@ -43,19 +47,24 @@ public class Laburpena {
 		panel.setBackground(SystemColor.controlLtHighlight);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
-		/*
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(349, 98, 383, 187);
-		panel.add(scrollPane);
-
-		tablaProdukt = new JTable();
-		scrollPane.setViewportView(tablaProdukt);
-		tablaProdukt.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
-						{ null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
-						{ null, null, null }, { null, null, null }, },
-				new String[] { "Izena", "Kantitatea", "Prezioa" }));
-		 */
+		
+		txtPrezio2 = new JTextField();
+		txtPrezio2.setBackground(SystemColor.controlLtHighlight);
+		txtPrezio2.setEditable(false);
+		txtPrezio2.setBounds(205, 540, 165, 50);
+		panel.add(txtPrezio2);
+		txtPrezio2.setColumns(10);
+		
+		txtPrezio = new JTextField();
+		txtPrezio.setEditable(false);
+		txtPrezio.setColumns(10);
+		txtPrezio.setBackground(SystemColor.controlLtHighlight);
+		txtPrezio.setBounds(205, 483, 165, 50);
+		panel.add(txtPrezio);
+		
+		setPrezio(datuak, txtPrezio, prezio1, prezio2);
+		setPrezioBez(datuak, txtPrezio2, prezio1, prezio2, totalConIva);
+		
 		btnAurrera = new JButton("->");
 		btnAurrera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -65,7 +74,7 @@ public class Laburpena {
 				frame.dispose();
 			}
 		});
-		btnAurrera.setBounds(760, 11, 89, 23);
+		btnAurrera.setBounds(760, 567, 89, 23);
 		panel.add(btnAurrera);
 
 		btnAtzera = new JButton("<-");
@@ -81,26 +90,22 @@ public class Laburpena {
 		btnAtzera.setBounds(10, 11, 45, 23);
 		panel.add(btnAtzera);
 		
-		lblIzenburua = new JLabel("Erosketa Orga");
+		lblIzenburua = new JLabel("Laburpena");
 		lblIzenburua.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIzenburua.setFont(new Font("Colonna MT", Font.PLAIN, 46));
-		lblIzenburua.setEnabled(false);
 		lblIzenburua.setBounds(256, 11, 350, 91);
 		panel.add(lblIzenburua);
 		
-		/*
-// Llenar la tabla con datos
-		DefaultTableModel model = (DefaultTableModel) tablaProdukt.getModel();
-		for (int i = 0; i < datuak.length; i++) {
-			if (datuak[i][0] != null) { // Verificar que hay datos antes de añadir
-				model.setValueAt(datuak[i][0], i, 0);
-				model.setValueAt(datuak[i][1], i, 1);
-				model.setValueAt(datuak[i][2], i, 2);
-			}
-		}
 
-		gehitu(datuak, tablaProdukt, frame, scrollPane);
-	*/
+		
+		JLabel lblSinIva = new JLabel("BEZik gabe");
+		lblSinIva.setBounds(78, 501, 102, 14);
+		panel.add(lblSinIva);
+		
+		JLabel lblIva = new JLabel("BEZarekin");
+		lblIva.setBounds(78, 558, 102, 14);
+		panel.add(lblIva);
+		
 // Colocar las imágenes seleccionadas en los JLabel correspondientes
 // Recorremos el array `datuak` para colocar las imágenes que han sido seleccionadas
 		for (int i = 0; i < datuak.length; i++) {
@@ -142,6 +147,16 @@ public class Laburpena {
 		}
 	}
 
+	public static void setPrezioBez(String datuak[][], JTextField txtPrezio2, double prezio1, double prezio2, double totalConIva) {
+		String prezio3 = Double.toString(prezioGuztiaBez(datuak, prezio2, prezio1));
+		txtPrezio2.setText(prezio3);
+	}
+	
+	
+	public static void setPrezio(String datuak[][], JTextField txtPrezio, double prezio1, double prezio2) {
+		String prezio3 = Double.toString(prezioGuztia(datuak, prezio1, prezio2));
+		txtPrezio.setText(prezio3);
+	}
 //Método para cargar la imagen en el JLabel y ajustarla al tamaño del JLabel
 	private void cargarImagen(JLabel label, String imagenPath) {
 		try {
@@ -168,6 +183,20 @@ public class Laburpena {
 		}
 		return prezio2;
 	}
+	
+	public static Double prezioGuztiaBez(String[][] datuak, double prezio2,  double prezio1) {
+		double preziokalkulo = 0;
+		for (int i = 0; i < datuak.length; i++) {
+			if (datuak[i][2] != null) { // Verifica que el valor no sea null
+				prezio1 = Double.parseDouble(datuak[i][2]);
+				preziokalkulo += prezio1;
+			}
+			double bez = preziokalkulo *0.21;
+			prezio2 = preziokalkulo + bez;
+		}
+		return prezio2;
+	}
+	
 
 	public static void gehitu(String[][] datuak, JTable tablaProdukt, JFrame frame, JScrollPane scrollPane) {
 		DefaultTableModel model = (DefaultTableModel) tablaProdukt.getModel();
