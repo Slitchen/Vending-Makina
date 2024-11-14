@@ -37,13 +37,13 @@ public class ProduktuMenua {
 	String mota = "";
 
 	public ProduktuMenua(Scanner sc, String[] motak, String[] izenak, String[] kodeak, Double[] prezioak,
-			String[] argazkiIzenak, String [][]datuak) {
+			String[] argazkiIzenak, String[][] datuak) {
 		produktuMenua(sc, motak, izenak, kodeak, prezioak, argazkiIzenak, datuak);
 	}
 
 	private void produktuMenua(Scanner sc, String[] motak, String[] izenak, String[] kodeak, Double[] prezioak,
-			String[] argazkiIzenak, String [][]datuak) {
-		
+			String[] argazkiIzenak, String[][] datuak) {
+
 		frame = new JFrame();
 		frame.setBounds(100, 100, 875, 640);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,7 +79,7 @@ public class ProduktuMenua {
 		btnEdaria.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mota = "edaria";
-				setMota(mota);
+				Metodoak.setMota(mota);
 				Katalogo katalogo = new Katalogo(sc, motak, izenak, kodeak, prezioak, argazkiIzenak, mota, datuak);
 				katalogo.frame.setVisible(true);
 				frame.dispose();
@@ -99,7 +99,7 @@ public class ProduktuMenua {
 		btnJanaria.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mota = "janaria";
-				setMota(mota);
+				Metodoak.setMota(mota);
 				Katalogo katalogo = new Katalogo(sc, motak, izenak, kodeak, prezioak, argazkiIzenak, mota, datuak);
 				katalogo.frame.setVisible(true);
 				frame.dispose();
@@ -119,7 +119,7 @@ public class ProduktuMenua {
 		btnSex.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mota = "sexshop";
-				setMota(mota);
+				Metodoak.setMota(mota);
 				Katalogo katalogo = new Katalogo(sc, motak, izenak, kodeak, prezioak, argazkiIzenak, mota, datuak);
 				katalogo.frame.setVisible(true);
 				frame.dispose();
@@ -139,7 +139,7 @@ public class ProduktuMenua {
 		btnErretzaile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mota = "erretzaile";
-				setMota(mota);
+				Metodoak.setMota(mota);
 				Katalogo katalogo = new Katalogo(sc, motak, izenak, kodeak, prezioak, argazkiIzenak, mota, datuak);
 				katalogo.frame.setVisible(true);
 				frame.dispose();
@@ -186,9 +186,4 @@ public class ProduktuMenua {
 		btnSex.setIcon(imageIcon4);
 
 	}
-
-	public static String setMota(String mota) {
-		return mota;
-	}
-
 }

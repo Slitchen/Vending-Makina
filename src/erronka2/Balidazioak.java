@@ -12,14 +12,14 @@ public class Balidazioak {
 	Scanner sc = new Scanner(System.in);
 
 	/**
-	 * sartutako zenbakia , zenbaki bat den ala ez balidatuko du
-	 * 
-	 * @param aukera  gordetzeko zenbakia
-	 * @param saukera String non aukera sartzen da geroago begirazeko zenbakia bat
-	 *                den ala ez
-	 * @return zenbakia den a al ez, zenbakia bada error= false, zenbakia ez bada
-	 *         error = true
+	 * Emandako string bat osorik zenbaki oso batera bihurtzen den ala ez balioztatzen du.
+	 * Balioztatzean errorea gertatzen bada, true itzultzen du; bestela, false itzultzen du.
+	 *  
+	 * @param aukera Zenbaki osoa den aukera.
+	 * @param saukera Emandako string parametroa.
+	 * @return Errorea gertatzen den edo ez adierazten duen boolean balioa. True errorea gertatzen bada, false ez bada.
 	 */
+	
 	public static boolean balidazio1(int aukera, String saukera) {
 		boolean error = true;
 
@@ -33,12 +33,14 @@ public class Balidazioak {
 	}
 
 	/**
-	 * sartutako gakoak balidatuko ditu
-	 * 
-	 * @param erabiltzailea
+	 * Erabiltzailearen izena eta pasahitza balioztatzen ditu.
+	 * Erabiltzaile izena eta pasahitza "admin" badira, true itzultzen du; bestela, false itzultzen du.
+	 *  
+	 * @param erabiltzailea 
 	 * @param pasahitza
-	 * @return balidatuta badago true, ez badago false
+	 * @return Balioztatu diren edo ez adierazten duen boolean balioa. True izena eta pasahitza "admin" badira, false bestela.
 	 */
+	
 	public static boolean balidatuGakoa(String erabiltzailea, String pasahitza) {
 		boolean balidatuta = false;
 
@@ -52,12 +54,14 @@ public class Balidazioak {
 	}
 
 	/**
-	 * balidatuko du sartu nahi den produktu berria, bere motan lekua izan dadin
+	 * Produktu motaren kantitatea balioztatzen duen metodoa. Emandako motaren produktu kantitatea
+	 * maximo baten azpitik dagoen ala ez egiaztatzen du. 
 	 * 
-	 * @param mota
-	 * @param motak
-	 * @return
+	 * @param mota Motaren izena, adibidez, "janaria", "edaria", "erretzaile", edo "sexshop".
+	 * @param motak Produktu motak gordetzen dituen array bat.
+	 * @return Balidatuta dagoen edo ez adierazten duen boolean balioa. True emandako motaren kantitatea maximoa gainditzen ez badu, bestela false.
 	 */
+	
 	public static boolean balidatuKant(String mota, String[] motak) {
 		boolean balidatuta = true;
 		int kant = 0;
@@ -72,7 +76,7 @@ public class Balidazioak {
 				return balidatuta;
 			} else {
 				balidatuta = false;
-				System.out.println(ANSI_RED+"ez dira gehiago sartzen"+ANSI_RESET);
+				System.out.println(ANSI_RED + "ez dira gehiago sartzen" + ANSI_RESET);
 				return balidatuta;
 			}
 
@@ -86,7 +90,7 @@ public class Balidazioak {
 				return balidatuta;
 			} else {
 				balidatuta = false;
-				System.out.println(ANSI_RED+"ez dira gehiago sartzen");
+				System.out.println(ANSI_RED + "ez dira gehiago sartzen");
 				return balidatuta;
 			}
 		} else if (mota.equals("erretzaile")) {
@@ -99,7 +103,7 @@ public class Balidazioak {
 				return balidatuta;
 			} else {
 				balidatuta = false;
-				System.out.println(ANSI_RED+"ez dira gehiago sartzen"+ANSI_RESET);
+				System.out.println(ANSI_RED + "ez dira gehiago sartzen" + ANSI_RESET);
 				return balidatuta;
 			}
 		} else if (mota.equals("sexshop")) {
@@ -112,7 +116,7 @@ public class Balidazioak {
 				return balidatuta;
 			} else {
 				balidatuta = false;
-				System.out.println(ANSI_RED+"ez dira gehiago sartzen"+ANSI_RESET);
+				System.out.println(ANSI_RED + "ez dira gehiago sartzen" + ANSI_RESET);
 				return balidatuta;
 			}
 		} else {
@@ -123,11 +127,12 @@ public class Balidazioak {
 	}
 
 	/**
-	 * jakiteko bai edo ez aukeren artean zein sartu den
+	 * Jakiteko emandako aukeren artean(bai edo ez)  zein sartu den
 	 * 
-	 * @param baiEz
-	 * @return bai bada true itzuliko du, bestela false
+	 * @param baiEz Emandako string parametroa, balioztatu behar dena.
+	 * @return Balioztatu diren edo ez adierazten duen boolean balioa. True string-ak "bai" balio duenenean, bestela false.
 	 */
+	
 	public static boolean baiEdoEz(String baiEz) {
 		boolean bai = false;
 		if (baiEz.equalsIgnoreCase("bai")) {
@@ -137,67 +142,73 @@ public class Balidazioak {
 			return bai;
 		}
 	}
-
+	
 	/**
-	 * balidatuko du sartutakoa bai edo ez dela, letra xehez edo larriz dagoen
-	 * kontuan hartu gabe
+	 * Emandako string baten balioa balioztatzen du eta "Bai" edo "Ez" bada, true itzultzen du; bestela false.
+	 * Emandako string-a "Bai" edo "Ez" den ala ez adierazten du, hizkuntza handi eta txikiak kontuan hartuta.
 	 * 
-	 * @param baiEz
-	 * @return balidatuta badago true, bestela false
+	 * @param baiEz Emandako string parametroa, balioztatu behar dena.
+	 * @return Balioztatu diren edo ez adierazten duen boolean balioa. True string-ak "Bai" edo "Ez" balio duenenean, bestela false.
 	 */
+	
 	public static boolean balidatutaBaiEz(String baiEz) {
 		boolean balidatuta = false;
 		if (baiEz.equalsIgnoreCase("Bai") || baiEz.equalsIgnoreCase("Ez")) {
 			balidatuta = true;
 			return balidatuta;
 		} else {
-			System.out.println(ANSI_RED+"Formatua txarto dago"+ANSI_RESET);
+			System.out.println(ANSI_RED + "Formatua txarto dago" + ANSI_RESET);
 			return balidatuta;
 		}
 	}
 
 	/**
-	 * balidatuko du sartutakoa double dela
+	 * Balidatuko du sartutakostring  double-ra psasa ahal deen edo ez
 	 * 
-	 * @param sPrezioa
-	 * @return prezioa double bada true itzuliko du, bestela false
+	 * @param sPrezioa Prezioaren balioa duen string parametroa.
+	 * @return Balioztatu den edo ez adierazten duen boolean balioa. True string-ak double formatura bihurtu bada, bestela false.
 	 */
+	
 	public static boolean balidatuPrezioa(String sPrezioa) {
 		boolean balidatuta = false;
 
 		try {
 			Double.parseDouble(sPrezioa);
 			balidatuta = true;
-			
+
 		} catch (Exception e) {
-			System.out.println(ANSI_RED+"txarto dago prezio formatua"+ANSI_RESET);
-			
+			System.out.println(ANSI_RED + "txarto dago prezio formatua" + ANSI_RESET);
+
 		}
 		return balidatuta;
 	}
 
 	/**
-	 * balidatuko du izena
+	 * Emandako string-a izen baliodun bat den ala ez balioztatzen du.
+	 * String-a gutxienez bi karaktere izan behar ditu eta bakarrik letrak (maiuskulak eta minuskulak) eta espazioak izan ditzake. 
 	 * 
 	 * @param izena
-	 * @return ondo badago true itzuliko du, bestela false
+	 * @return Balioztatu den edo ez adierazten duen boolean balioa. True string-ak formatu zuzena badu, bestela false.
 	 */
+	
 	public static boolean balidatuIzena(String izena) {
 		boolean balidatuta = false;
-		if (izena.matches("[a-zA-Z ]{2,}")) {// errespetatu behar duen formatua, [a-zA-Z ] letra larriak, xeheak eta espazioak hartzen ditu, {2,} gutxienez bi karaktere
+		if (izena.matches("[a-zA-Z ]{2,}")) {// errespetatu behar duen formatua, [a-zA-Z ] letra larriak, xeheak eta
+												// espazioak hartzen ditu, {2,} gutxienez bi karaktere
 			balidatuta = true;
 			return balidatuta;
 		} else {
-			System.out.println(ANSI_RED+"Txarto dago"+ANSI_RESET);
+			System.out.println(ANSI_RED + "Txarto dago" + ANSI_RESET);
 			return balidatuta;
 		}
 	}
 
 	/**
-	 * balidatuko du kodea
+	 * Emandako string-a kode baliodun bat den ala ez balioztatzen du.
+	 * Kodeak "A" letra batekin hasi behar du eta ondoren hiru zenbaki izan behar ditu.
 	 * 
 	 * @param kodea
-	 * @return ondo badago true itzuliko du, bestela false
+	 * @return Balioztatu den edo ez adierazten duen boolean balioa. True string-ak formatu zuzena badu, bestela false.
 	 */
 	public static boolean balidatuKodea(String kodea) {
 		boolean balidatuta = false;
@@ -211,38 +222,40 @@ public class Balidazioak {
 	}
 
 	/**
-	 * balidatuko du ea kodea errepikatuta dagoen eta balidatuKodea deituko du
-	 * formatu onan dagoen ala ez balidatzeko
+	 * Emandako string-a kode baliodun bat den ala ez balioztatzen du.
+	 * Kodea balioduna dela eta kodeak arrayan dagoenik ez dela ziurtatzen du.
 	 * 
-	 * @param kodea
-	 * @param produktuKop
-	 * @param kodeak
-	 * @return ondo badago true itzuliko du, bestela false
+	 * @param kodea Balioztatu behar den kodea.
+	 * @param produktuKop Produktu kopurua, kodeak arrayan dauden kodeen kopurua adierazten duena.
+	 * @param kodeak Produktu kodeak gordetzen dituen arraya.
+	 * @return Balioztatu den edo ez adierazten duen boolean balioa. True kodea balioduna bada eta arrayan errepikatzen ez bada, bestela false.
 	 */
+	
 	public static boolean balidatuKodeaDesberdina(String kodea, int produktuKop, String[] kodeak) {
-	    boolean balidatuta = false;
-	    balidatuta = balidatuKodea(kodea); // Asegura que el código es válido
+		boolean balidatuta = false;
+		balidatuta = balidatuKodea(kodea); // Asegura que el código es válido
 
-	    if (balidatuta) {
-	        for (int i = 0; i < produktuKop; i++) {
-	            String kodeaI = kodeak[i]; // Asigna el código actual del array
+		if (balidatuta) {
+			for (int i = 0; i < produktuKop; i++) {
+				String kodeaI = kodeak[i]; // Asigna el código actual del array
 
-	            // Verifica si kodeaI es null antes de comparar
-	            if (kodeaI != null && kodeaI.equals(kodea)) {
-	                System.out.println("Kodea ezin da errepikatu");
-	                balidatuta = false;
-	                break; // Sale del bucle si encuentra un duplicado
-	            }
-	        }
-	    }
-	    return balidatuta;
+				// Verifica si kodeaI es null antes de comparar
+				if (kodeaI != null && kodeaI.equals(kodea)) {
+					System.out.println("Kodea ezin da errepikatu");
+					balidatuta = false;
+					break; // Sale del bucle si encuentra un duplicado
+				}
+			}
+		}
+		return balidatuta;
 	}
 
 	/**
-	 * balidatuko du ea emandako 4 moten artean bat hartzen duen
+	 * Emandako string-a produktu mota baliodun bat den ala ez balioztatzen du.
+	 * Produktu motaren balioa "janaria", "edaria", "sexshop" edo "erretzaile" bada, true itzultzen du, bestela false.
 	 * 
-	 * @param mota
-	 * @return ondo badago true itzuliko du, bestela false
+	 * @param mota Mota balioa duen string parametroa.
+	 * @return Balioztatu den edo ez adierazten duen boolean balioa. True string-ak formatu zuzena badu, bestela false.
 	 */
 	public static boolean balidatuMota(String mota) {
 		boolean balidatuta = false;
@@ -251,11 +264,19 @@ public class Balidazioak {
 			balidatuta = true;
 			return balidatuta;
 		} else {
-			System.out.println(ANSI_RED+"Txarto dago"+ANSI_RESET);
+			System.out.println(ANSI_RED + "Txarto dago" + ANSI_RESET);
 			return balidatuta;
 		}
 	}
 	
+	/**
+	 * Emandako string-a ordainketa baliodun bat den ala ez balioztatzen du.
+	 * String-a double formatura bihur daitekeen ala ez egiaztatzen du.
+	 * 
+	 * @param sOrdainketa Ordainketa balioa duen string parametroa.
+	 * @return Balioztatu den edo ez adierazten duen boolean balioa. True string-ak double formatura bihurtu bada, bestela false.
+	 */
+
 	public static boolean balidatuOrdainketa(String sOrdainketa) {
 		boolean balidatuta = false;
 

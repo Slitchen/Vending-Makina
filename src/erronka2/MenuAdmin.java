@@ -10,7 +10,8 @@ public class MenuAdmin {
 	public static void menu1(Scanner sc, String[] motak, String[] izenak, String[] kodeak, Double[] prezioak,
 			String[] argazkiIzenak, int produktuKop, boolean arrayHasieratuak, JFrame frame) {
 		int aukera = 0;
-		String saukera = "";
+		String saukera;
+		String baiEz;
 		boolean error = true;
 		boolean gora = true;
 
@@ -34,7 +35,6 @@ public class MenuAdmin {
 			case 1: // produktuak gehitzeko menua, datuak eskatuko ditu , eta behin balidatutak
 					// gordeko ditu arrayan, arrayaren azken atalean
 				boolean baiEZ;
-				String baiEz = "";
 				do {
 					Metodoak.produktuakGehitu(sc, motak, izenak, kodeak, prezioak, argazkiIzenak, produktuKop);
 					produktuKop++;
@@ -53,9 +53,8 @@ public class MenuAdmin {
 				produktuKop--;
 				break;
 			case 3:
-				
+
 				Metodoak.produktuaModifikatu(sc, motak, izenak, kodeak, prezioak, argazkiIzenak, produktuKop);
-				
 				Metodoak.produktuGuztiakAtera(motak, izenak, kodeak, prezioak, argazkiIzenak);
 				break;
 			case 4:
@@ -66,6 +65,7 @@ public class MenuAdmin {
 			}
 		} while (gora);// beti buklean egoteko
 	}
+
 	public static boolean arrayHasieratuak(boolean arrayHasieratuak) {
 		arrayHasieratuak = true;
 		return arrayHasieratuak;

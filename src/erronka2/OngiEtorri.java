@@ -18,24 +18,12 @@ public class OngiEtorri {
 	private String[] motak = new String[30];
 	private String[] izenak = new String[30];
 	private String[] kodeak = new String[30];
-	private Double [] prezioak = new Double[30]; 
+	private Double[] prezioak = new Double[30];
 	private String[] argazkiIzenak = new String[30];
 	private String[][] datuak = new String[9][4];
 	private int produktuKop = 11;
-	private boolean arrayHasieratuak = false; 
+	private boolean arrayHasieratuak = false;
 	Scanner sc = new Scanner(System.in);
-
-	public static void hasieratuArray(String[] motak, String[] izenak, String[] kodeak,  Double [] prezioak, String[] argazkiIzenak, String[][] datuak, boolean arrayHasieratuak) {
-		if (!arrayHasieratuak) {
-			motak = KudeatuArray.hasieratuMotak(motak);
-			izenak = KudeatuArray.hasieratuIzenak(izenak);
-			kodeak = KudeatuArray.hasieratuKodeak(kodeak);
-			prezioak = KudeatuArray.hasieratuPrezioak(prezioak);
-			argazkiIzenak = KudeatuArray.hasieratuArgazkiIzenak(argazkiIzenak);
-			arrayHasieratuak = MenuAdmin.arrayHasieratuak(arrayHasieratuak);
-			System.out.println("Arrayak Hasieratua");
-		}
-	}
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -49,28 +37,27 @@ public class OngiEtorri {
 			}
 		});
 	}
-	
+
 	public OngiEtorri() {
 		OngiEtorria();
 	}
 
-	
 	private void OngiEtorria() {
-		
-		
+
 		frame = new JFrame();
 		frame.setBounds(100, 100, 875, 640);
 		frame.setBackground(SystemColor.controlLtHighlight);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		hasieratuArray(motak, izenak, kodeak, prezioak, argazkiIzenak, datuak, arrayHasieratuak);
-		
+		Metodoak.hasieratuArray(motak, izenak, kodeak, prezioak, argazkiIzenak, datuak, arrayHasieratuak);
+
 		btnOngiEtorri = new JButton("ONGI ETORRI");
 		btnOngiEtorri.setFont(new Font("Leelawadee", Font.BOLD, 28));
 		btnOngiEtorri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProduktuMenua produktuMenua = new ProduktuMenua(sc, motak, izenak, kodeak, prezioak, argazkiIzenak, datuak);
+				ProduktuMenua produktuMenua = new ProduktuMenua(sc, motak, izenak, kodeak, prezioak, argazkiIzenak,
+						datuak);
 				produktuMenua.frame.setVisible(true);
 				frame.dispose();
 			}
